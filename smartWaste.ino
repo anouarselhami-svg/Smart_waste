@@ -1,19 +1,4 @@
-
-#if defined(__has_include)
-  #if __has_include(<Servo.h>)
-    #include <Servo.h>
-  #else
-    // Fallback used only when the Servo library is unavailable.
-    class Servo {
-    public:
-      void attach(int) {}
-      void write(int) {}
-    };
-  #endif
-#else
-  #include <Servo.h>
-#endif
-
+#include <Servo.h>
 // ==================== SERVOMOTEURS ====================
 Servo rampe;
 Servo trappe;
@@ -301,6 +286,11 @@ void traiterCommande(String commande) {
 
   if (commande == "RESET") {
     reinitialiserSysteme();
+    return;
+  }
+    if (commande == "DETECT") {
+    dechetPresent = true;
+    Serial.println("DECHET_DETECTE");
     return;
   }
 
